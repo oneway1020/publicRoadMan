@@ -29,6 +29,7 @@ function RootStack() {
       setUser(profile);
     });
   }, [setUser]);
+
   return (
     <Stack.Navigator>
       {user ? (
