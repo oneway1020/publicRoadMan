@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
 });
 
 export default React.forwardRef(BorderedInput);
-// const BorderedInput = React.forwrdRef(({hasMarginBottom, ...rest}, ref) => {
+// const BorderedInput = React.forwardRef(({hasMarginBottom, ...rest}, ref) => {
 //      return(...)
 // });  이런식으로 사용할 수도 있음
