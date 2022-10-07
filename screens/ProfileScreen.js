@@ -7,6 +7,7 @@ function ProfileScreen() {
   const route = useRoute();
   const navigation = useNavigation();
   const {userId, displayName} = route.params ?? {};
+  // route = PostCard.js 에서 받아옴
 
   useEffect(() => {
     navigation.setOptions({
