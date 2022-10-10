@@ -15,6 +15,7 @@ import storage from '@react-native-firebase/storage';
 import {useUserContext} from '../contexts/UserContext';
 import {v4} from 'uuid';
 import {createPost} from '../lib/posts';
+import events from '../lib/events';
 
 function UploadScreen() {
   const route = useRoute();
@@ -39,9 +40,12 @@ function UploadScreen() {
     } else {
       await reference.putFile(asset.uri);
     }
+    console.log(JSON.stringify(reference, null, '\t'));
     const photoURL = await reference.getDownloadURL();
+    console.log(JSON.stringify(photoURL, null, '\t'));
     await createPost({description, photoURL, user});
     // TODO 포스트 목록 새로고침
+    events.emit('refresh');
   }, [res, user, description, navigation]);
 
   useEffect(() => {

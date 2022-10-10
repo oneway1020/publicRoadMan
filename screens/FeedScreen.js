@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   ActivityIndicator,
   FlatList,
   RefreshControl,
   StyleSheet,
 } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 import PostCard from '../components/PostCard';
 import usePosts from '../hooks/usePosts';
 
 function FeedScreen() {
   const {posts, noMorePost, refreshing, onLoadMore, onRefresh} = usePosts();
+  // console.log(posts);
+
+  const postsReady = posts !== null;
+  useEffect(() => {
+    if (postsReady) {
+      SplashScreen.hide();
+    }
+  }, [postsReady]);
 
   return (
     <FlatList

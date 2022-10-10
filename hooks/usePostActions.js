@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {ActionSheetIOS, Platform} from 'react-native';
 import {removePost} from '../lib/posts';
 import {useNavigation, useRoute} from '@react-navigation/native';
+import events from '../lib/events';
 
 export default function usePostActions({id, description}) {
   const [isSelecting, setIsSelecting] = useState(false);
@@ -10,7 +11,10 @@ export default function usePostActions({id, description}) {
   const route = useRoute();
 
   const edit = () => {
-    console.log('TODO: edit');
+    navigation.navigate('Modify', {
+      id,
+      description,
+    });
   };
 
   const remove = async () => {
@@ -20,6 +24,7 @@ export default function usePostActions({id, description}) {
     if (route.name === 'Post') {
       navigation.pop();
     }
+    events.emit('removePost', id);
   };
   const onPressMore = () => {
     if (Platform.OS === 'android') {
